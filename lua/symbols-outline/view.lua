@@ -39,6 +39,15 @@ function View:setup_view()
   vim.api.nvim_buf_set_name(self.bufnr, 'OUTLINE')
   vim.api.nvim_buf_set_option(self.bufnr, 'filetype', 'Outline')
   vim.api.nvim_buf_set_option(self.bufnr, 'modifiable', false)
+  vim.api.nvim_set_option_value('foldcolumn', '0', { win = self.winnr })
+  vim.api.nvim_set_option_value('signcolumn', 'no', { win = self.winnr })
+  vim.api.nvim_set_option_value('cursorline', true, { win = self.winnr })
+  vim.api.nvim_set_option_value('cursorlineopt', 'both', { win = self.winnr })
+  local winhl = table.concat({
+      "CursorLine:NvimTreeCursorLine",
+      "CursorLineNr:NvimTreeCursorLineNr",
+    }, ",")
+  vim.api.nvim_set_option_value('winhl', winhl, { win = self.winnr })
 
   if config.options.show_numbers or config.options.show_relative_numbers then
     vim.api.nvim_win_set_option(self.winnr, 'nu', true)
